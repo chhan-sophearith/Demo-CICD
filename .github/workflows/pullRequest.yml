@@ -44,3 +44,14 @@ jobs:
             Build/Build/Products
           key: ${{ runner.os }}-deps-v1-${{ hashFiles('BILDsolid.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
           restore-keys: ${{ runner.os }}-deps-v1-
+
+      - name: Build IPA
+        run: |
+            xcodebuild -workspace BILDsolid.xcworkspace -scheme BILDsolid -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/BILDsolid.xcarchive
+            xcodebuild -exportArchive -archivePath $PWD/build/BILDsolid.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
+    
+      - name: Upload IPA to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+         name: BILDsolid-IPA
+         path: build/IPA
