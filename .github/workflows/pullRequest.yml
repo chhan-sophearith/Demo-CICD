@@ -45,13 +45,16 @@ jobs:
           key: ${{ runner.os }}-deps-v1-${{ hashFiles('BILDsolid.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
           restore-keys: ${{ runner.os }}-deps-v1-
 
+      - name: List Directory Contents
+        run: ls -R
+    
       - name: Build IPA
         run: |
-              if [ -d "BILDsolid.xcworkspace" ]; then
-                xcodebuild -workspace BILDsolid.xcworkspace -scheme BILDsolid -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/BILDsolid.xcarchive
-                xcodebuild -exportArchive -archivePath $PWD/build/BILDsolid.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
+              if [ -d "DemoCICD.xcodeproj" ]; then
+                xcodebuild -project DemoCICD.xcodeproj -scheme DemoCICD -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/DemoCICD.xcarchive
+                xcodebuild -exportArchive -archivePath $PWD/build/DemoCICD.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
               else
-                echo "Workspace not found. Listing directory contents:"
+                echo "Project not found. Listing directory contents:"
                 ls -R
                 exit 1
               fi
@@ -60,5 +63,5 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v2
         with:
-         name: BILDsolid-IPA
+         name: DemoCICD-IPA
          path: build/IPA/*.ipa
