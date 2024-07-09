@@ -47,10 +47,17 @@ jobs:
 
       - name: Build IPA
         run: |
-          xcodebuild -workspace BILDsolid.xcodeproj/project.xcworkspace -scheme BILDsolid -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/BILDsolid.xcarchive
-          xcodebuild -exportArchive -archivePath $PWD/build/BILDsolid.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
+              if [ -d "BILDsolid.xcworkspace" ]; then
+                xcodebuild -workspace BILDsolid.xcworkspace -scheme BILDsolid -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/BILDsolid.xcarchive
+                xcodebuild -exportArchive -archivePath $PWD/build/BILDsolid.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
+              else
+                echo "Workspace not found. Listing directory contents:"
+                ls -R
+                exit 1
+              fi
     
       - name: Upload IPA to Artifacts
+        if: success()
         uses: actions/upload-artifact@v2
         with:
          name: BILDsolid-IPA
