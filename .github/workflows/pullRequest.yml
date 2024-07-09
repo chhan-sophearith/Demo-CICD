@@ -47,7 +47,7 @@ jobs:
 
       - name: Build IPA
         run: |
-          xcodebuild -workspace BILDsolid.xcworkspace -scheme BILDsolid -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/BILDsolid.xcarchive
+          xcodebuild -workspace DemoCICD/BILDsolid.xcworkspace -scheme BILDsolid -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/BILDsolid.xcarchive
           xcodebuild -exportArchive -archivePath $PWD/build/BILDsolid.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
     
       - name: Upload IPA to Artifacts
