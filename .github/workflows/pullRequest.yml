@@ -52,15 +52,14 @@ jobs:
         run: |
           if [ -d "DemoCICD.xcodeproj" ]; then
             xcodebuild clean -project DemoCICD.xcodeproj
-            xcodebuild archive -project DemoCICD.xcodeproj -scheme DemoCICD -sdk iphoneos -configuration AppStoreDistribution -archivePath $PWD/build/DemoCICD.xcarchive -configuration "Release" -destination generic/platform=iOS -allowProvisioningUpdates
+            xcodebuild archive -project DemoCICD.xcodeproj -scheme DemoCICD -sdk iphoneos -configuration Release -archivePath $PWD/build/DemoCICD.xcarchive -allowProvisioningUpdates
             xcodebuild -exportArchive -archivePath $PWD/build/DemoCICD.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build/IPA
           else
             echo "Project not found. Listing directory contents:"
             ls -R
             exit 1
           fi
-      
-    
+          
       - name: Upload IPA to Artifacts
         if: success()
         uses: actions/upload-artifact@v2
