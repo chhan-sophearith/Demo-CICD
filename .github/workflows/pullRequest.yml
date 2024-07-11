@@ -75,7 +75,7 @@ jobs:
         uses: mastersam07/firebase-app-distribution-action@v0.1
         with:
             #appId: ${{secrets.FIREBASE_IOS_APP_ID}}
-            appId: "erbgerbetnb"
+            appId: "1:408369382561:ios:e59c999ab5e75c05fd9ce0"
             groups: testers
             file: ${{ runner.temp }}/build/DemoCICD.ipa
             serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
