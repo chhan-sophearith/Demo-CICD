@@ -1,18 +1,10 @@
-name: Firebase App Distribution
+name: "Build Firebase"
 
 on:
-    pull_request:
-        branches:
-          - develop
-          
+  pull_request:
+    branches:
+      - develop
   workflow_dispatch:
-    inputs:
-      release_notes:
-        type: string
-        required: true
-        default: 'Testing Check'
-        description: 'Change in run-on- replaced it with ubuntu-latest from windows-latest'
-
 jobs:
   build:
     name: Building and Distributing App
