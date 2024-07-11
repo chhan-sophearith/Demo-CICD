@@ -71,7 +71,7 @@ jobs:
       - name: Upload and Distribute App
         uses: mastersam07/firebase-app-distribution-action@v0.1
         with:
-            serviceCredentialsFileContent: "4f2eb5127b4053451c08cbf4b4d50878c3b0a9af" 
+            serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
             appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
             file: ${{ runner.temp }}/build/DemoCICD.ipa
             groups: 'testers,qa'  # Optional: distribution groups
