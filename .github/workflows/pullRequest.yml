@@ -69,7 +69,7 @@ jobs:
           retention-days: 3
 
       - name: Install Firebase Tools
-        run: curl -sL https://firebase.tools | bash
+        run: curl -sL https://firebase.tools | upgrade=true bash
  
       - name: Upload and Distribute App
         uses: mastersam07/firebase-app-distribution-action@v0.1
