@@ -44,12 +44,12 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
           
-      - name: Update Build Number
-        run: |
-            PLIST_PATH="DemoCICD/Info.plist"  # Replace with your Info.plist path
-            CURRENT_BUILD=$(xcodebuild -showBuildSettings | grep "CURRENT_PROJECT_VERSION" | cut -d "=" -f2 | tr -d '[:space:]')
-            NEW_BUILD=$((CURRENT_BUILD + 1))
-            /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD" $PLIST_PATH
+      # - name: Update Build Number
+      #   run: |
+      #       PLIST_PATH="DemoCICD/Info.plist"  # Replace with your Info.plist path
+      #       CURRENT_BUILD=$(xcodebuild -showBuildSettings | grep "CURRENT_PROJECT_VERSION" | cut -d "=" -f2 | tr -d '[:space:]')
+      #       NEW_BUILD=$((CURRENT_BUILD + 1))
+      #       /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $NEW_BUILD" $PLIST_PATH
 
       - name: build archive
         run: |
