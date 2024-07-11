@@ -9,8 +9,6 @@ jobs:
   build_with_signing:
     runs-on: macos-latest
     steps:
-      # this was more debug as was curious what came pre-installed
-      # GitHub shares this online, e.g. https://github.com/actions/runner-images/blob/macOS-12/20230224.1/images/macos/macos-12-Readme.md
       - name: check Xcode version
         run: /usr/bin/xcodebuild -version
 
@@ -68,46 +66,12 @@ jobs:
         with:
           name: app
           path: ${{ runner.temp }}/build/DemoCICD.ipa
-          # you can also archive the entire directory 
-          # path: ${{ runner.temp }}/build
           retention-days: 3
-
-      # - name: Install Firebase CLI
-      #   run: |
-      #       curl -sL https://firebase.tools | bash
-  
-      # - name: Upload artifact to Firebase App Distribution
-      #   run: |
-      #       firebase appdistribution:distribute $RUNNER_TEMP/build/DemoCICD.ipa \
-      #       --app ${{ secrets.FIREBASE_IOS_APP_ID }} \
-      #       --token ${{ secrets.FIREBASE_TOKEN }} \
-      #       --groups testers
-
-      #       - name: Upload application
-      #       uses: actions/upload-artifact@v3
-      #       with:
-      #         name: app
-      #         path: $RUNNER_TEMP/build/DemoCICD.ipa
-      #         retention-days: 3
-    
-      # - name: Install Firebase CLI
-      #   run: |
-      #         curl -sL https://firebase.tools | bash
-    
-      # - name: Upload IPA to Firebase App Distribution
-      #   env:
-      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-      #   run: |
-      #         firebase appdistribution:distribute $RUNNER_TEMP/build/DemoCICD.ipa \
-      #          --app ${{ secrets.FIREBASE_IOS_APP_ID }}
-      #           --groups "testers" \
-      #           --release-notes "Automated build uploaded via GitHub Actions."
-          
 
       - name: Upload and Distribute App
         uses: mastersam07/firebase-app-distribution-action@v0.1
         with:
-              serviceCredentialsFileContent: ${{ secrets.FIREBASE_TOKEN }}
+              serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
               appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
               file: ${{ runner.temp }}/build/DemoCICD.ipa  # e.g., './build/app/outputs/flutter-apk/app-release.apk'
               groups: 'testers,qa' 
