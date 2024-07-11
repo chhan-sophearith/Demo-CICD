@@ -10,15 +10,6 @@ jobs:
     name: Building and Distributing App
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.0
-
-      - name: check Xcode version
-        run: /usr/bin/xcodebuild -version
-
-      - name: checkout repository
-        uses: actions/checkout@v3
-
       - name: Upload a Build Fire
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
