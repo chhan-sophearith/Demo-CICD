@@ -74,4 +74,4 @@ jobs:
             serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
             appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
             file: ${{ runner.temp }}/build/DemoCICD.ipa
-            groups: 'testers,qa'  # Optional: distribution groups
+           # groups: 'testers,qa'  # Optional: distribution groups
