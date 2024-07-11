@@ -67,10 +67,13 @@ jobs:
           name: app
           path: ${{ runner.temp }}/build/DemoCICD.ipa
           retention-days: 3
+
+      - name: Install Firebase Tools
+        run: npm install -g firebase-tool
  
       - name: Upload and Distribute App
-        #uses: mastersam07/firebase-app-distribution-action@v0.1
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        uses: mastersam07/firebase-app-distribution-action@v0.1
+        #uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
             serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
             appId: ${{ secrets.FIREBASE_IOS_APP_ID }}
